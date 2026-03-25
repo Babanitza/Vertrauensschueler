@@ -1,8 +1,11 @@
-const cors = require('cors');
-app.use(cors());
-const express = require('express');
-const nodemailer = require('nodemailer');
+const express = require("express");
+const cors = require("cors");
+const nodemailer = require("nodemailer");
+
 const app = express();
+app.use(cors());
+app.use(express.json());
+
 
 // WICHTIG: Damit der Server den Text aus dem Button-Klick lesen kann
 app.use(express.json()); 
