@@ -11,8 +11,6 @@ app.use(express.json());
 app.use(express.json()); 
 app.use(express.static('public'));
 
-const nodemailer = require("nodemailer");
-
 const transporter = nodemailer.createTransport({
   host: "in-v3.mailjet.com",
   port: 587,
