@@ -11,11 +11,14 @@ app.use(express.json());
 app.use(express.json()); 
 app.use(express.static('public'));
 
+const nodemailer = require("nodemailer");
+
 const transporter = nodemailer.createTransport({
-  host: 'gmail', // Deine IServ-Adresse
+  host: "in-v3.mailjet.com",
+  port: 587,
   auth: {
-    user: 'lukasbebnitz001@gmail.com',
-    pass: 'LukasWolli@1234'
+    user: process.env.MAILJET_API_KEY,
+    pass: process.env.MAILJET_SECRET_KEY
   }
 });
 
