@@ -12,12 +12,10 @@ app.use(express.json());
 app.use(express.static('public'));
 
 const transporter = nodemailer.createTransport({
-  host: 'isarnwohld.org', // Deine IServ-Adresse
-  port: 465,
-  secure: true,
+  host: 'gmail', // Deine IServ-Adresse
   auth: {
-    user: 'lukas.bebnitz',
-    pass: 'Paul.Iserv'
+    user: 'lukasbebnitz001@gmail.com',
+    pass: 'Lukaspaul@25012012'
   }
 });
 
@@ -31,8 +29,8 @@ app.post('/send-email', (req, res) => {
   }
 
   const mailOptions = {
-    from: 'lukas.bebnitz@isarnwohld.org',
-    to: 'lukas.bebnitz@isarnwohld.org',
+    from: 'lukasbebnitz001@gmail.com',
+    to: 'lukasbebnitz001@gmail.com',
     subject: 'Neues Anliegen von der Vertrauensschüler-Seite',
     text: benutzerText // Hier landet der getippte Text in der E-Mail
   };
