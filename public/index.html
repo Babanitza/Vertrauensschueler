@@ -204,7 +204,7 @@
                 message += ` Er/Sie möchte sich in der Pause ${datas["pause"]} mit den Vertrauensschülern ${datas["vertrauensschueler"]} treffen.`;
             }
 
-            fetch('https://vertrauensschüler.onnrender.com/send-email', {
+            fetch('https://vertrauensschuler.onnrender.com/send-email', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ nachricht: message })
