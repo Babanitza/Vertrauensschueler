@@ -15,7 +15,7 @@ const transporter = nodemailer.createTransport({
   host: 'gmail', // Deine IServ-Adresse
   auth: {
     user: 'lukasbebnitz001@gmail.com',
-    pass: 'Lukaspaul@25012012'
+    pass: 'LukasWolli@1234'
   }
 });
 
