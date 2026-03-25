@@ -12,10 +12,12 @@ app.use(express.json());
 app.use(express.static('public'));
 
 const transporter = nodemailer.createTransport({
-  host: 'gmail', // Deine IServ-Adresse
+  host: 'isarnwohld.org', // Deine IServ-Adresse
+  port: 465,
+  secure: true,
   auth: {
-    user: 'lukasbebnitz001@gmail.com',
-    pass: 'Lukaspaul@25012012'
+    user: 'lukas.bebnitz',
+    pass: 'Paul.Iserv'
   }
 });
 
