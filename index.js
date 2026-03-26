@@ -7,12 +7,11 @@ app.use(cors());
 app.use(express.json());
 
 const transporter = nodemailer.createTransport({
-  host: "isarnwohld.org",
-  port: 587,
+  host: "gmail",
   secure: false,
   auth: {
-    user: "lukas.bebnitz",
-    pass: "Paul.Iserv"
+    user: "lukasbebnitz001@gmail.com",
+    pass: "Lukaspaul@25012012"
   }
 });
 
@@ -25,7 +24,7 @@ app.post('/send-email', async (req, res) => {
 
   try {
     await transporter.sendMail({
-      from: `"Lukas Bebnitz" <lukas.bebnitz@isarnwohld.org>`,
+      from: `"lukasbebnitz001@gmail.com`,
       to: "lukas.bebnitz@isarnwohld.org",
       subject: "Neues Anliegen von der Vertrauensschüler-Seite",
       text: benutzerText
