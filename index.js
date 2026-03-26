@@ -5,6 +5,7 @@ const Mailjet = require("node-mailjet");
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(express.static('public'));
 
 const mailjet = Mailjet.apiConnect(
   process.env.MAILJET_API_KEY,
