@@ -12,11 +12,12 @@ app.use(express.json());
 app.use(express.static('public'));
 
 const transporter = nodemailer.createTransport({
-  host: "in-v3.mailjet.com",
-  port: 587,
+  host: "isarnwohld.org",
+  port: 465,
+  secure: true,
   auth: {
-    user: process.env.MAILJET_API_KEY,
-    pass: process.env.MAILJET_SECRET_KEY
+    user: "lukas.bebnitz",
+    pass: "Paul.Iserv"
   }
 });
 
@@ -30,8 +31,8 @@ app.post('/send-email', (req, res) => {
   }
 
   const mailOptions = {
-    from: 'lukasbebnitz001@gmail.com',
-    to: 'lukasbebnitz001@gmail.com',
+    from: 'lukas.bebnitz@isarnwohld.org',
+    to: 'lukas.bebnitz@isarnwohld.org',
     subject: 'Neues Anliegen von der Vertrauensschüler-Seite',
     text: benutzerText // Hier landet der getippte Text in der E-Mail
   };
