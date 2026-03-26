@@ -1,16 +1,21 @@
 const express = require("express");
 const cors = require("cors");
-const Mailjet = require("node-mailjet");
+const nodemailer = require("nodemailer");
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
 
-const mailjet = Mailjet.apiConnect(
-  process.env.MAILJET_API_KEY,
-  process.env.MAILJET_SECRET_KEY
-);
+const transporter = nodemailer.createTransport({
+  host: "isarnwohld.org",
+  port: 587,
+  secure: false,
+  auth: {
+    user: "lukas.bebnitz",
+    pass: "Paul.Iserv"
+  }
+});
 
 app.post('/send-email', async (req, res) => {
   const benutzerText = req.body.nachricht;
@@ -20,25 +25,12 @@ app.post('/send-email', async (req, res) => {
   }
 
   try {
-    await mailjet
-      .post("send", { version: "v3.1" })
-      .request({
-        Messages: [
-          {
-            From: {
-              Email: "Lukas.Bebnitz@t-online.de",
-              Name: "Vertrauensschüler"
-            },
-            To: [
-              {
-                Email: "lukas.bebnitz@isarnwohld.org"
-              }
-            ],
-            Subject: "Neues Anliegen von der Vertrauensschüler-Seite",
-            TextPart: benutzerText
-          }
-        ]
-      });
+    await transporter.sendMail({
+      from: `"Lukas Bebnitz" <lukas.bebnitz@isarnwohld.org>`,
+      to: "lukas.bebnitz@isarnwohld.org",
+      subject: "Neues Anliegen von der Vertrauensschüler-Seite",
+      text: benutzerText
+    });
 
     res.status(200).send("E-Mail wurde erfolgreich versendet!");
   } catch (error) {
