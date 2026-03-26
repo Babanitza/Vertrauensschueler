@@ -171,49 +171,6 @@
             align-items: center;
         }
     </style>
-    <script>
-
-        const vertrauensschueler = {
-            "Montag, 1. große Pause": ["Lukas Bebnitz", "Thorun Born"],
-            "Montag, 2. große Pause": ["Daniel Hahn", "Mika Malmström"],
-            "Dienstag, 1. große Pause": ["Malia Menrath", "Hanna Oltmanns"],
-            "Dienstag, 2. große Pause": ["Jakob Pammler", "Phillip Rüfer"],
-            "Mittwoch, 1. große Pause": ["Shirin Sommerfeld", "Melina Zimmermann"],
-            "Mittwoch, 2. große Pause": ["Matthias von Kethelhodt"],
-            "Donnerstag, 1. große Pause": ["Lukas Bebnitz", "Thorun Born"],
-            "Donnerstag, 2. große Pause": ["Daniel Hahn", "Mika Malmström"],
-            "Freitag, 1. große Pause": ["Malia Menrath", "Hanna Oltmanns"],
-            "Freitag, 2. große Pause": ["Jakob Pammler", "Phillip Rüfer"]
-        };
-
-        document.addEventListener("change", function () {
-            const pause = document.getElementById("pause").value;
-            let vertrauensschueler_anwesend = vertrauensschueler[pause] || [];
-            if (vertrauensschueler_anwesend.length === 0) {
-                vertrauensschueler_anwesend.push("-- Keine Pause ausgewählt --");
-                document.getElementById("vertrauensschueler").style.fontStyle = "italic";
-            } else {
-                document.getElementById("vertrauensschueler").style.fontStyle = "normal";
-            }
-            document.getElementById("vertrauensschueler").innerHTML = vertrauensschueler_anwesend.join(", ");
-        });
-        function send() {
-            const datas = { "name": document.getElementById("name").value, "class": document.getElementById("class").value, "problem": document.getElementById("problem").value, "pause": document.getElementById("pause").value, "vertrauensschueler": document.getElementById("vertrauensschueler").innerHTML };
-            let message = `${datas["name"]} aus der Klasse ${datas["class"]} hat folgendes Problem: ${datas["problem"]}.`;
-            if (datas["pause"] !== "-- Nein --") {
-                message += ` Er/Sie möchte sich in der Pause ${datas["pause"]} mit den Vertrauensschülern ${datas["vertrauensschueler"]} treffen.`;
-            }
-
-            fetch('https://vertrauensschueler-production.up.railway.app/send-email', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ nachricht: message })
-            })
-                .then(response => response.text())
-                .then(data => alert("Server sagt: " + data))
-                .catch(err => console.error('Fehler:', err));
-        }
-    </script>
 </head>
 
 <body>
@@ -349,6 +306,49 @@
             <p>© 2026 Vertrauensschüler</p>
         </footer>
 
+        <script>
+
+            const vertrauensschueler = {
+                "Montag, 1. große Pause": ["Lukas Bebnitz", "Thorun Born"],
+                "Montag, 2. große Pause": ["Daniel Hahn", "Mika Malmström"],
+                "Dienstag, 1. große Pause": ["Malia Menrath", "Hanna Oltmanns"],
+                "Dienstag, 2. große Pause": ["Jakob Pammler", "Phillip Rüfer"],
+                "Mittwoch, 1. große Pause": ["Shirin Sommerfeld", "Melina Zimmermann"],
+                "Mittwoch, 2. große Pause": ["Matthias von Kethelhodt"],
+                "Donnerstag, 1. große Pause": ["Lukas Bebnitz", "Thorun Born"],
+                "Donnerstag, 2. große Pause": ["Daniel Hahn", "Mika Malmström"],
+                "Freitag, 1. große Pause": ["Malia Menrath", "Hanna Oltmanns"],
+                "Freitag, 2. große Pause": ["Jakob Pammler", "Phillip Rüfer"]
+            };
+
+            document.addEventListener("change", function () {
+                const pause = document.getElementById("pause").value;
+                let vertrauensschueler_anwesend = vertrauensschueler[pause] || [];
+                if (vertrauensschueler_anwesend.length === 0) {
+                    vertrauensschueler_anwesend.push("-- Keine Pause ausgewählt --");
+                    document.getElementById("vertrauensschueler").style.fontStyle = "italic";
+                } else {
+                    document.getElementById("vertrauensschueler").style.fontStyle = "normal";
+                }
+                document.getElementById("vertrauensschueler").innerHTML = vertrauensschueler_anwesend.join(", ");
+            });
+            function send() {
+                const datas = { "name": document.getElementById("name").value, "class": document.getElementById("class").value, "problem": document.getElementById("problem").value, "pause": document.getElementById("pause").value, "vertrauensschueler": document.getElementById("vertrauensschueler").innerHTML };
+                let message = `${datas["name"]} aus der Klasse ${datas["class"]} hat folgendes Problem: ${datas["problem"]}.`;
+                if (datas["pause"] !== "-- Nein --") {
+                    message += ` Er/Sie möchte sich in der Pause ${datas["pause"]} mit den Vertrauensschülern ${datas["vertrauensschueler"]} treffen.`;
+                }
+
+                fetch('https://vertrauensschueler-production.up.railway.app/send-email', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ nachricht: message })
+                })
+                    .then(response => response.text())
+                    .then(data => alert("Server sagt: " + data))
+                    .catch(err => console.error('Fehler:', err));
+            }
+        </script>
 </body>
 
 </html>
