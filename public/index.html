@@ -204,7 +204,7 @@
                 message += ` Er/Sie möchte sich in der Pause ${datas["pause"]} mit den Vertrauensschülern ${datas["vertrauensschueler"]} treffen.`;
             }
 
-            fetch('/send-email', {
+            fetch('https://vertrauensschueler-production.up.railway.app/send-email', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ nachricht: message })
