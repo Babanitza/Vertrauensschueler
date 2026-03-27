@@ -10,8 +10,8 @@ const transporter = nodemailer.createTransport({
   host: "gmail",
   secure: "false",
   auth: {
-    user: "lukasbebnitz001@gmail.com",
-    pass: "Lukas@25012012!"
+    user: "fam.bebnitz@gmail.com",
+    pass: "jeyu mkmt vnhd gqeu"
   }
 });
 
@@ -24,7 +24,7 @@ app.post('/send-email', async (req, res) => {
 
   try {
     await transporter.sendMail({
-      from: `lukasbebnitz001@gmail.com`,
+      from: `fam.bebnitz@gmail.com`,
       to: "lukas.bebnitz@isarnwohld.org",
       subject: "Neues Anliegen von der Vertrauensschüler-Seite",
       text: benutzerText
