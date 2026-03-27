@@ -39,5 +39,5 @@ app.post("/sendmail", async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = 8080;
 app.listen(PORT, () => console.log("Server läuft auf Port " + PORT));
