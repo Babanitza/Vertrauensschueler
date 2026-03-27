@@ -5,6 +5,11 @@ const nodemailer = require("nodemailer");
 const app = express();
 
 app.use(cors()); // <-- Wichtig!
+
+app.use(cors({
+  origin: "*"
+}));
+
 app.use(express.json());
 
 
