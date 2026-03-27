@@ -339,9 +339,9 @@
                     message += ` Er/Sie möchte sich in der Pause ${datas["pause"]} mit den Vertrauensschülern ${datas["vertrauensschueler"]} treffen.`;
                 }
 
-                fetch('https://vertrauensschueler-production.up.railway.app/sendmail', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                fetch("https://vertrauensschueler-production.up.railway.app/sendmail", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ nachricht: message })
                 })
                     .then(response => response.text())
