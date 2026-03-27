@@ -34,4 +34,5 @@ app.post("/sendmail", async (req, res) => {
   }
 });
 
-app.listen(3000, () => console.log("Server läuft auf Port 3000"));
+const PORT = 3000;
+app.listen(PORT, () => console.log("Server läuft auf Port " + PORT));
