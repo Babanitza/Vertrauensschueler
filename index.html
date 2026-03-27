@@ -339,7 +339,7 @@
                     message += ` Er/Sie möchte sich in der Pause ${datas["pause"]} mit den Vertrauensschülern ${datas["vertrauensschueler"]} treffen.`;
                 }
 
-                fetch('https://babanitza.github.io/Vertrauensschueler/sendmail', {
+                fetch('https://vertrauensschueler-production.up.railway.app//sendmail', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ nachricht: message })
