@@ -8,7 +8,7 @@ app.use(express.json());
 
 const transporter = nodemailer.createTransport({
   host: "gmail",
-  secure: "false",
+  secure: "true",
   auth: {
     user: "fam.bebnitz@gmail.com",
     pass: "jeyu mkmt vnhd gqeu"
@@ -25,7 +25,7 @@ app.post('/send-email', async (req, res) => {
   try {
     await transporter.sendMail({
       from: `fam.bebnitz@gmail.com`,
-      to: "lukas.bebnitz@isarnwohld.org",
+      to: "fam.bebnitz@gmail.com",
       subject: "Neues Anliegen von der Vertrauensschüler-Seite",
       text: benutzerText
     });
