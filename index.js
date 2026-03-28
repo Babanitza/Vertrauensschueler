@@ -24,7 +24,7 @@ app.post("/sendmail", async (req, res) => {
 
   try {
     const email = await resend.emails.send({
-      from: "<anything>@iaestogare.resend.app",
+      from: "vertrauensschueler@iaestogare.resend.app",
       to: "lukas.bebnitz@isarnwohld.org",
       subject: "Neue Nachricht vom Vertrauensschüler-Formular",
       text: `
