@@ -19,6 +19,7 @@
     "mysql2": "^3.20.0",
     "node-mailjet": "^6.0.11",
     "nodemailer": "^8.0.4",
-    "require": "^0.4.4"
+    "require": "^0.4.4",
+    "resend": "^6.9.4"
   }
 }

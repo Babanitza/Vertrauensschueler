@@ -1,48 +1,54 @@
 const express = require("express");
 const cors = require("cors");
-const nodemailer = require("nodemailer");
-const path = require("path");   // <-- FEHLTE!
+const path = require("path");
+const { Resend } = require("resend");
 
 const app = express();
-
 app.use(cors());
 app.use(express.json());
 
 // Static Files (Frontend)
 app.use(express.static(path.join(__dirname, "public")));
 
+// Resend initialisieren
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+// Test-Route
 app.get("/", (req, res) => {
-  res.send("Backend läuft!");
+  res.send("Backend läuft mit RESEND!");
 });
 
-// Mailer
-const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 465,
-  secure: true,
-  auth: {
-    user: "fam.bebnitz@gmail.com",
-    pass: "jeyu mkmt vnhd gqeu"
-  }
-});
-
-// API Route
+// Mail-Route
 app.post("/sendmail", async (req, res) => {
+  const { name, klasse, problem, pause, vertrauens } = req.body;
+
   try {
-    const info = await transporter.sendMail({
-      from: "fam.bebnitz@gmail.com",
+    const email = await resend.emails.send({
+      from: "vertrauensschueler@resend.dev",
       to: "lukas.bebnitz@gmail.com",
-      subject: "Testmail über Fetch",
-      text: "Diese Mail wurde über einen Fetch-Request ausgelöst."
+      subject: "Neue Nachricht vom Vertrauensschüler-Formular",
+      text: `
+Name: ${name}
+Klasse: ${klasse}
+
+Problem:
+${problem}
+
+Pausenwunsch:
+${pause}
+
+Anwesende Vertrauensschüler:
+${vertrauens}
+      `
     });
 
-    res.json({ success: true, id: info.messageId });
+    res.json({ success: true, id: email.id });
   } catch (err) {
     console.error(err);
     res.status(500).json({ success: false, error: err.message });
   }
 });
 
-// Start Server
+// Server starten
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log("Server läuft auf Port " + PORT));
