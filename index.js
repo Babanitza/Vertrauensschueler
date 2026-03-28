@@ -23,6 +23,10 @@ const transporter = nodemailer.createTransport({
   }
 });
 
+app.get("/", (req, res) => {
+  res.send("Backend läuft!");
+});
+
 app.post("/sendmail", async (req, res) => {
   try {
     const info = await transporter.sendMail({
