@@ -1,18 +1,21 @@
 const express = require("express");
 const cors = require("cors");
 const nodemailer = require("nodemailer");
+const path = require("path");   // <-- FEHLTE!
 
 const app = express();
 
-app.use(cors()); // <-- Wichtig!
-
-app.use(cors({
-  origin: "*"
-}));
-
+app.use(cors());
 app.use(express.json());
 
+// Static Files (Frontend)
+app.use(express.static(path.join(__dirname, "public")));
 
+app.get("/", (req, res) => {
+  res.send("Backend läuft!");
+});
+
+// Mailer
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 465,
@@ -23,12 +26,7 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-
-app.use(express.static(path.join(__dirname, "public")));
-app.get("/", (req, res) => {
-  res.send("Backend läuft!");
-});
-
+// API Route
 app.post("/sendmail", async (req, res) => {
   try {
     const info = await transporter.sendMail({
@@ -45,5 +43,6 @@ app.post("/sendmail", async (req, res) => {
   }
 });
 
+// Start Server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log("Server läuft auf Port " + PORT));
