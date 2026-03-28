@@ -39,5 +39,5 @@ app.post("/sendmail", async (req, res) => {
   }
 });
 
-const PORT = 8080;
+const PORT = railway.env.PORT || 8080;
 app.listen(PORT, () => console.log("Server läuft auf Port " + PORT));
